@@ -7,5 +7,5 @@ variables:
   SOURCE_DIST: bookworm
   DEB_BUILD_OPTIONS: nocheck noudeb terse
   DEB_BUILD_PROFILES: nocheck noudeb
-  BUILD_ARCH_ARM: ''
+  BUILD_ARCH_ARM64: ''
 
