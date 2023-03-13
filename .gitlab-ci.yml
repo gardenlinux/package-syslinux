@@ -5,7 +5,6 @@ include:
 variables:
   SOURCE_NAME: syslinux
   SOURCE_DIST: bookworm
-  ORIG_TAR: "syslinux_6.04~git20190206.bf6db5b4+dfsg1-3.orig.tar.xz"
   DEB_BUILD_OPTIONS: nocheck noudeb terse
   DEB_BUILD_PROFILES: nocheck noudeb
   BUILD_ARCH_ARM64: ''
