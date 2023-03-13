@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euE
+shopt -s failglob
+
+function git() {
+  command git -c advice.detachedHead=false "$@"
+}
+
+
+SOURCE_NAME=${1:?Please specify source name}
+UPSTREAM_VERSION=${2:?Please specify upstream version}
+UPSTREAM_REPO=${3:?Please specify upstream repository}
+UPSTREAM_REF=${4:?Please specify git tag or branch of upstream repository}
+DEBIAN_REPO=${5:?Please specify deian repository}
+DEBIAN_REF=${6:?Please specify git tag or branch of debian repository}
+
+
+OUTPUT_DIR=$(mktemp -d -p "$(pwd)" "_orig_${UPSTREAM_VERSION}_XXXXXXXXXX")
+trap 'rm -rf -- "$OUTPUT_DIR"' EXIT
+
+# Get upstream sources
+echo '### Cloning upstream repository'
+git clone --quiet --depth 1 --branch "${UPSTREAM_REF}" "${UPSTREAM_REPO}" "${OUTPUT_DIR}/src"
+
+# Get upstream salsa
+git clone --quiet --depth 1 --branch "${DEBIAN_REF}" "${DEBIAN_REPO}" "${OUTPUT_DIR}/debian-ref"
+rsync -a "${OUTPUT_DIR}/debian-ref/debian" "${OUTPUT_DIR}/src"
+
+
+echo '### generating a debian conform orig file'
+(
+  cd ${OUTPUT_DIR}
+  mv src "${SOURCE_NAME}-${UPSTREAM_VERSION}"
+  tar -cJf "${SOURCE_NAME}_${UPSTREAM_VERSION}.orig.tar.xz" "${SOURCE_NAME}-${UPSTREAM_VERSION}"
+  ls
+)
+
+echo '### importing orig via pristine-lfs'
+pristine-lfs commit --force-overwrite "${OUTPUT_DIR}/${SOURCE_NAME}_${UPSTREAM_VERSION}.orig.tar.xz"
