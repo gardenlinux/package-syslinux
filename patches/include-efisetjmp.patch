@@ -1,0 +1,16 @@
+diff --color -Naur a/efi/main.c b/efi/main.c
+--- a/efi/main.c	2019-02-06 20:30:51
++++ b/efi/main.c	2023-06-06 10:51:52
+@@ -11,6 +11,12 @@
+ #include <syslinux/linux.h>
+ #include <sys/ansi.h>
+
++#include <stdint.h> 
++#include <efi.h>
++#include <efilib.h>
++#include <efidef.h>
++#include <efisetjmp.h>
++
+ #include "efi.h"
+ #include "fio.h"
+ #include "version.h"
