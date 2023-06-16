@@ -4,7 +4,7 @@ include:
 
 variables:
   SOURCE_NAME: syslinux
-  SOURCE_DIST: bookworm
+  SOURCE_DIST: trixie
   DEB_BUILD_OPTIONS: nocheck noudeb terse
   DEB_BUILD_PROFILES: nocheck noudeb
   BUILD_ARCH_ARM64: ''
