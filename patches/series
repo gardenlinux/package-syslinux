@@ -1,2 +1,3 @@
 syslinux-update-zlib.patch
 include-efisetjmp.patch
+explicit-flag-defaults.patch 
