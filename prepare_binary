@@ -1,0 +1,4 @@
+if [ "$(dpkg --print-architecture)" = arm64 ]; then
+	echo "syslinux does not build on arm64, nothing to do."
+	exit 0
+fi

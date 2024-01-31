@@ -1,16 +1,28 @@
-diff --color -Naur a/efi/main.c b/efi/main.c
---- a/efi/main.c	2019-02-06 20:30:51
-+++ b/efi/main.c	2023-06-06 10:51:52
-@@ -11,6 +11,12 @@
- #include <syslinux/linux.h>
- #include <sys/ansi.h>
-
-+#include <stdint.h> 
-+#include <efi.h>
-+#include <efilib.h>
-+#include <efidef.h>
-+#include <efisetjmp.h>
-+
- #include "efi.h"
- #include "fio.h"
- #include "version.h"
+diff -urN syslinux-6.04~git20190206.bf6db5b4+dfsg1/debian/patches/include-efisetjmp.patch debian/patches/include-efisetjmp.patch
+--- syslinux-6.04~git20190206.bf6db5b4+dfsg1/debian/patches/include-efisetjmp.patch	1970-01-01 01:00:00.000000000 +0100
++++ debian/patches/include-efisetjmp.patch	2023-12-05 11:24:32.000000000 +0100
+@@ -0,0 +1,16 @@
++Description: include-efisetjmp.patch
++--- syslinux-6.04~git20190206.bf6db5b4+dfsg1.orig/efi/main.c
+++++ syslinux-6.04~git20190206.bf6db5b4+dfsg1/efi/main.c
++@@ -11,6 +11,12 @@
++ #include <syslinux/linux.h>
++ #include <sys/ansi.h>
++ 
+++#include <stdint.h> 
+++#include <efi.h>
+++#include <efilib.h>
+++#include <efidef.h>
+++#include <efisetjmp.h>
+++
++ #include "efi.h"
++ #include "fio.h"
++ #include "version.h"
+diff -urN syslinux-6.04~git20190206.bf6db5b4+dfsg1/debian/patches/series debian/patches/series
+--- syslinux-6.04~git20190206.bf6db5b4+dfsg1/debian/patches/series	2023-12-05 11:26:31.000000000 +0100
++++ debian/patches/series	2023-12-05 11:24:21.000000000 +0100
+@@ -7,3 +7,4 @@
+ 0018-prevent-pow-optimization.patch
+ 0019-gcc-10-compatibility.patch
+ syslinux-update-zlib.patch
++include-efisetjmp.patch
